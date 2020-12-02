@@ -16,15 +16,15 @@ class TravelListHandler {
         let travels = this.travelRepository.list();
 
         let travelsView = new TravelListView();
-        for (const [key, travel] of Object.entries(travels)) {
+        Object.values(travels).forEach(travel => {
             // Création des vues des aéroports
             let startAirport = airports[travel.startAirportId];
             let endAirport = airports[travel.endAirportId];
             let startAirportView = new AirportView(startAirport.name, startAirport.code);
             let endAirportView = new AirportView(endAirport.name, endAirport.code);
 
-            travelsView.addTravel(new TravelView(startAirportView, endAirportView, travel.cost));
-        }
+            travelsView.addTravel(new TravelView(travel.id, startAirportView, endAirportView, travel.cost));
+        });
 
         return travelsView;
     }

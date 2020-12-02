@@ -11,12 +11,12 @@ class TravelRepository {
 
     list() {
         return {
-            1: new Travel(1, 1, 2),
-            2: new Travel(2, 1, 3),
-            3: new Travel(3, 2, 1),
-            4: new Travel(4, 2, 3),
-            5: new Travel(5, 3, 1),
-            6: new Travel(6, 3, 2),
+            1: new Travel(1, 1, 2, 150),
+            2: new Travel(2, 1, 3, 200),
+            3: new Travel(3, 2, 1, 300),
+            4: new Travel(4, 2, 3, 180),
+            5: new Travel(5, 3, 1, 190),
+            6: new Travel(6, 3, 2, 400),
         };
     }
 }

@@ -1,4 +1,4 @@
-class TravelView {
+export class Travel {
     constructor(id, startAirport, endAirport, cost) {
         this.id = id;
         this.startAirport = startAirport;
@@ -6,5 +6,3 @@ class TravelView {
         this.cost = cost;
     }
 }
-
-module.exports = TravelView;

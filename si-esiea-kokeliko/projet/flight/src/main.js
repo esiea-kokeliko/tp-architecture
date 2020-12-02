@@ -1,8 +1,10 @@
 import Vue from 'vue'
-import App from './App.vue'
+import TravelList from './Presentation/Travel/TravelList.vue'
+import vuetify from './Infrastructure/Utils/vuetify';
 
 Vue.config.productionTip = false
 
 new Vue({
-  render: h => h(App),
+  vuetify,
+  render: h => h(TravelList)
 }).$mount('#app')
