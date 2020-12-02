@@ -1,3 +1,3 @@
-const Interface = require('./Interface');
+const Interface = require('../../Infrastructure/Utils/Interface');
 
-module.exports = new Interface('AirportRepositoryInterface', 'read');
+module.exports = new Interface('AirportRepositoryInterface', 'read', 'list');

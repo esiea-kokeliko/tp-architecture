@@ -40,8 +40,8 @@ Utilisation de l'architecture DDD organisé ainsi :
 
 #### Route de l'API
 
-- GET /flight (liste tous les vols, c'est la vue qui permettra de filter sur les aéroports)
-- POST /reserve (formulaire contenant le code de l'aréport de départ et de celui d'arrivé, ainsi que possiblement un code user (si non fournis, on en renvoie un))
+- GET /travel (liste tous les trajets disponible, c'est la vue qui permettra de filter sur les aéroports)
+- POST /reserve (formulaire contenant l'identifiant du voyage, ainsi que possiblement un code user (si non fournis, on en renvoie un))
 - GET /user/{code} (liste tous les tickets pour un utilisateur)
 
 S'il y a du temps, proposer une interface SWAGGER.

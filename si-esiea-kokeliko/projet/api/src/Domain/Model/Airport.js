@@ -5,3 +5,5 @@ class Airport {
         this.code = code;
     }
 }
+
+module.exports = Airport;
