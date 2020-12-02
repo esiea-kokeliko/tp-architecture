@@ -3,8 +3,9 @@
 ## Modèle de données
 
 - Airport (id, name,  code (unique))
-- AirportTicket (ticket-id, airport-id, type (=START,END))
-- Ticket (id, cost, user-id)
+- Travel (id, start-airport-id, end-airport-id)
+- Ticket (id, cost, travel-id, reservation-id)
+- Reservation (id, user-id)
 - User (id, code (unique))
 
 ### Base de données
