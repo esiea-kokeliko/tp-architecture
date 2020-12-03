@@ -15,5 +15,18 @@ export default {
             })
         ;
         return travels;
+    },
+
+    reservate(travelsList) {
+        let code = '';
+        let payload = {
+            travels: travelsList,
+        }
+        Axios.post('http://localhost:3000/reservate', payload)
+            .then(response => {
+                code = response.data;
+            })
+        ;
+        return code;
     }
 }
