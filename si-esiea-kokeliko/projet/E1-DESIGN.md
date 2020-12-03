@@ -10,7 +10,7 @@ Projet séparé en 2 applications :
 - une API pour la gestion des données
 - une application cliente pour la vue utilisateur
 
-![alt text](https://i.imgur.com/HFG85P2.png)
+![alt text](https://i.imgur.com/rBCwrxb.png)
 
 #### Route de l'API
 
