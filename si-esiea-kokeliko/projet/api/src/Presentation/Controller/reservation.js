@@ -3,7 +3,7 @@ let router = express.Router();
 
 const TravelReservateHandler = require('../../Application/Travel/TravelReservateHandler');
 
-router.post('/reservate', function(req, res, next) {
+router.post('/book', function(req, res, next) {
     let handler = new TravelReservateHandler();
 
     res.header('Content-Type', 'application/json');

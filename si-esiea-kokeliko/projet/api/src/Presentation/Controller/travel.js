@@ -3,7 +3,7 @@ let router = express.Router();
 
 const TravelListHandler = require('../../Application/Travel/TravelListHandler');
 
-router.get('/travel', function(req, res, next) {
+router.get('/travels', function(req, res, next) {
     let handler = new TravelListHandler();
 
     res.header('Content-Type', 'application/json');

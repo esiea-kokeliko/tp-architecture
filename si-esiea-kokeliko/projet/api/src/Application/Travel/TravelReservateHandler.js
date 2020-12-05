@@ -10,9 +10,13 @@ class TravelReservateHandler {
 
     handle(data) {
         let travels = data.travels;
+        let email = data.email;
+        let user = null;
+        if (userRepository.read()) {
+            /* @todo insertion avec repository */
+            user = new User(1, 'abc@email.com');
+        }
 
-        /* @todo insertion avec repository */
-        let user = new User(1, 'ABC');
         let reservation = new Reservation(1, user.id);
 
         let count = 0;
@@ -20,8 +24,6 @@ class TravelReservateHandler {
             let ticket = new Ticket(count, travel.id, reservation.id);
             count++;
         });
-
-        return user.code;
     }
 }
 

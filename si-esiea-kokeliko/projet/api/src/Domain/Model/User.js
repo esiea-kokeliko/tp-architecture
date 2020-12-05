@@ -1,7 +1,7 @@
 class User {
-    constructor(id, code) {
+    constructor(id, email) {
         this.id = id;
-        this.code = code;
+        this.email = email;
     }
 }
 

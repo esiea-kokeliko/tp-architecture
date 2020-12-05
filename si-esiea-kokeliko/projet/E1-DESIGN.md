@@ -24,6 +24,7 @@ Celles-ci utiliseront l'architecture logicielle DDD :
 Un client fera une requête à l'application cliente, celle-ci ira ensuite requeter l'api pour l'accès aux données.
 
 L'application client sera codée en Javascript avec Vue.js et Vuetify.
+
 L'API sera codée en Javascript avec Express.
 
 #### Route de l'API
@@ -39,15 +40,6 @@ S'il y a du temps, proposer une interface SWAGGER.
 ![alt text](https://i.imgur.com/GzMjXav.png)
 
 On a choisi d'utiliser MariaDB pour la base de données car c'est une base gratuite et simple d'utilisation.
-
-### SPOF
-
-Afin d'éviter tout dysfonctionnement, on pourra répliquer l'API et l'application cliente sur plusieurs machines.
-Afin d'assurer que la base de données contienne toujours la vérité, elle sera non répliquée, et donc notre "Single Point Of Failure".
-
-### SPOT
-
-On considère que c'est la base de données qui contient la vérité.
 
 ## CI / CD
 
