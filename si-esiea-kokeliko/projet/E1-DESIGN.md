@@ -10,15 +10,28 @@ Projet séparé en 2 applications :
 - une API pour la gestion des données
 - une application cliente pour la vue utilisateur
 
-![alt text](https://i.imgur.com/rBCwrxb.png)
+Celles-ci utiliseront l'architecture logicielle DDD :
+
+![alt text](https://i.imgur.com/o6Ihfed.png)
+
+Un client fera une requête à l'application cliente, celle-ci ira ensuite requeter l'api pour l'accès aux données.
+
+L'application client sera codée en Javascript avec Vue.js et Vuetify.
+L'API sera codée en Javascript avec Express.
 
 #### Route de l'API
 
-- GET /travel (liste tous les trajets disponible, c'est la vue qui permettra de filter sur les aéroports)
-- POST /reserve (formulaire contenant l'identifiant du voyage, ainsi que possiblement un code user (si non fournis, on en renvoie un))
+- GET /travels (liste tous les trajets disponible, c'est la vue qui permettra de filter sur les aéroports)
+- POST /book (formulaire contenant l'identifiant du voyage, ainsi que possiblement un code user (si non fournis, on en renvoie un))
 - GET /user/{code} (liste tous les tickets pour un utilisateur)
 
 S'il y a du temps, proposer une interface SWAGGER.
+
+### Basé sur une infrastructure 3 tiers
+
+![alt text](https://i.imgur.com/GzMjXav.png)
+
+On a choisi d'utiliser MariaDB pour la base de données car c'est une base gratuite et simple d'utilisation.
 
 ### SPOF
 

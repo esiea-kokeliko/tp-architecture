@@ -70,19 +70,6 @@
           <v-card class="grey lighten-1">
             <v-card-title>{{ travel.startAirport.name }} {{ travel.startAirport.code }} to {{ travel.endAirport.name }} {{ travel.endAirport.code }}</v-card-title>
             <v-card-subtitle>{{ travel.cost }} €</v-card-subtitle>
-            <div class="text-right">
-              <v-btn
-                  class="mx-2"
-                  fab
-                  dark
-                  color="indigo"
-                  v-on:click="addTravel(travel)"
-              >
-                <v-icon dark>
-                  mdi-plus
-                </v-icon>
-              </v-btn>
-            </div>
           </v-card>
         </v-col>
       </v-row>
@@ -141,7 +128,6 @@ export default {
         alert('Vous devez chosir un ou plusieurs voyages pour passer à l\'étape suivante.');
       } else {
         this.reservationCode.push(TravelReservateHandler.handle(this.travelsChosen));
-        console.log(this.reservationCode);
         this.isTravel = false;
       }
     }
