@@ -7,8 +7,11 @@
 Explication :
 
 Il y a des trajets (Travel) entre les aéroports.
+
 Un utilisateur (User) peut faire une réservation (Reservation) avec un ou plusieurs billets (Ticket).
+
 Un billet concerne un trajet. 
+
 On utilise une table (dénormalisé) entre Travel et Ticket afin de pouvoir récupérer facilement, le cout, la date et le nombre de billet disponible pour un trajet.
 
 ## Projet WEB

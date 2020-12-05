@@ -5,7 +5,7 @@ import {Airport} from '../..//Domain/Model/Airport';
 export default {
     list() {
         let travels = [];
-        Axios.get('http://localhost:3000/travel')
+        Axios.get('http://localhost:3000/travels')
             .then(response => {
                 Object.values(response.data.travels).forEach(travel => {
                     let startAirport = new Airport(travel.startAirport.name, travel.startAirport.code);
@@ -22,7 +22,7 @@ export default {
         let payload = {
             travels: travelsList,
         }
-        Axios.post('http://localhost:3000/reservate', payload)
+        Axios.post('http://localhost:3000/book', payload)
             .then(response => {
                 code = response.data;
             })
