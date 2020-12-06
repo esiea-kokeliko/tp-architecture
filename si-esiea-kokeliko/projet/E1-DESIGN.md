@@ -34,7 +34,7 @@ L'API sera codée en Javascript avec Express.
 
 - GET /travels (liste tous les trajets disponible, c'est la vue qui permettra de filter sur les aéroports)
 - POST /book (formulaire contenant l'identifiant du voyage, ainsi que l'email de l'utilisateur)
-- GET /user/{code} (liste tous les tickets pour un utilisateur)
+- GET /user/{email} (liste tous les tickets pour un utilisateur)
 
 S'il y a du temps, proposer une interface SWAGGER.
 

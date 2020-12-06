@@ -20,6 +20,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 app.use(require('./src/Presentation/Controller/travel'));
 app.use(require('./src/Presentation/Controller/reservation'));
+app.use(require('./src/Presentation/Controller/listUserReservation'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -34,7 +35,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.send('error');
+  res.send(err.message);
 });
 
 module.exports = app;
