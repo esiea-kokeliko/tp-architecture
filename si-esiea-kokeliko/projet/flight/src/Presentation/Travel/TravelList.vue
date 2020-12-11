@@ -1,20 +1,55 @@
 <template>
-  <v-app>
-    <v-container grid-list-md fluid fill-height class="grey" v-if="isTravel">
-      <v-row>
-        <h2>Trajet disponible</h2>
-      </v-row>
-      <v-row>
-        <v-col cols="12" sm="4" v-for="travel in travels" v-bind:key="travel.id">
-          <v-card class="grey lighten-1">
+		<v-app >
+		
+		<v-img class="mr-3" src="../../../public/logo.png" text-center width="10%" v-if="!page==0"></v-img>
+		<v-template v-if="page==0">
+		<v-container class="light" >
+
+		
+		<v-img class="mr-3" src="../../../public/logo.png" text-center width="90%"></v-img>
+			<br>
+			<h1 text-center >Entrez votre adresse e-mail pour réserver un vol :</h1> 
+			<v-container grid-list-md fluid fill-height class="light" >
+				<v-text-field
+				v-model="email"
+				:rules="emailRules"
+				required
+				label="E-mail"
+				></v-text-field>
+				<v-btn
+				class="mx-10"
+				fab
+				dark
+				color="blue darken-4"
+				v-on:click="validEmail(email)"
+				>
+					<v-icon dark>
+					mdi-check-bold
+					</v-icon>
+				</v-btn>  
+			</v-container>
+
+		</v-container>
+</v-template>
+
+    <v-container grid-list-md fluid fill-height class="light" v-if="page==1">
+		
+		<h2>Bonjour {{this.email}}</h2>
+
+		<v-row no-gutters>
+		<h2>Trajet disponible</h2>
+		</v-row>
+		<v-row>
+        <v-col cols="12" sm="3" v-for="travel in travels" v-bind:key="travel.id">
+          <v-card class="grey lighten-3">
             <v-card-title>{{ travel.startAirport.name }} {{ travel.startAirport.code }} to {{ travel.endAirport.name }} {{ travel.endAirport.code }}</v-card-title>
             <v-card-subtitle>{{ travel.cost }} €</v-card-subtitle>
             <div class="text-right">
               <v-btn
-                  class="mx-2"
+                  class="mx-1"
                   fab
                   dark
-                  color="indigo"
+                  color="light-green darken-1"
                   v-on:click="addTravel(travel)"
               >
                 <v-icon dark>
@@ -25,12 +60,12 @@
           </v-card>
         </v-col>
       </v-row>
-      <v-row>
+      <v-row no-gutters>
       <h2>Trajet sélectionné</h2>
       </v-row>
       <v-row>
-        <v-col cols="12" sm="4" v-for="travel in travelsChosen" v-bind:key="travel.id">
-          <v-card class="grey lighten-1">
+        <v-col cols="12" sm="3" v-for="travel in travelsChosen" v-bind:key="travel.id">
+          <v-card class="grey lighten-3">
             <v-card-title>{{ travel.startAirport.name }} {{ travel.startAirport.code }} to {{ travel.endAirport.name }} {{ travel.endAirport.code }}</v-card-title>
             <v-card-subtitle>{{ travel.cost }} €</v-card-subtitle>
             <div class="text-right">
@@ -38,11 +73,11 @@
                   class="mx-2"
                   fab
                   dark
-                  color="indigo"
+                  color="deep-orange accent-4"
                   v-on:click="removeTravel(travel)"
               >
                 <v-icon dark>
-                  mdi-minus
+                  mdi-delete
                 </v-icon>
               </v-btn>
             </div>
@@ -52,22 +87,27 @@
       <v-row no-gutters>
         <v-btn
             dark
-            color="indigo"
+            color="blue darken-2"
             v-on:click="reservate()"
-        >
-          <v-icon dark>
-            Valider
-          </v-icon>
+            rounded
+          >
+          <v-text>Valider</v-text>
         </v-btn>
       </v-row>
     </v-container>
-    <v-container grid-list-md fluid fill-height class="grey" v-if="!isTravel">
-      <v-row>
-        <h2>Trajet réservé {{ this.reservationCode[0] }}</h2>
+
+    
+    <v-container grid-list-md fluid fill-height class="light" v-if="page==2">
+
+		<h2>Bonjour {{this.email}}</h2>
+
+      <v-row no-gutters>
+        <h2>Trajet réservé</h2>
+        <h2> {{ this.reservationCode[0] }}</h2>
       </v-row>
       <v-row>
         <v-col cols="12" sm="4" v-for="travel in travelsChosen" v-bind:key="travel.id">
-          <v-card class="grey lighten-1">
+          <v-card class="grey lighten-3">
             <v-card-title>{{ travel.startAirport.name }} {{ travel.startAirport.code }} to {{ travel.endAirport.name }} {{ travel.endAirport.code }}</v-card-title>
             <v-card-subtitle>{{ travel.cost }} €</v-card-subtitle>
           </v-card>
@@ -87,10 +127,11 @@ export default {
   },
   data: () => {
     return {
-      reservationCode: [],
-      travels: [],
-      travelsChosen: [],
-      isTravel: true
+		reservationCode: [],
+		travels: [],
+		travelsChosen: [],
+		page: 0,
+		email: ""
     };
   },
   created() {
@@ -128,9 +169,17 @@ export default {
         alert('Vous devez chosir un ou plusieurs voyages pour passer à l\'étape suivante.');
       } else {
         this.reservationCode.push(TravelReservateHandler.handle(this.travelsChosen));
-        this.isTravel = false;
+        this.page = 2;
       }
-    }
+	},
+	validEmail(label){
+		if (label.length == 0) {
+			alert('Vous devez enregistrer une adresse email.');
+		} else {
+			this.email = label;
+			this.page = 1;
+		}
+	}
   }
 }
 </script>
