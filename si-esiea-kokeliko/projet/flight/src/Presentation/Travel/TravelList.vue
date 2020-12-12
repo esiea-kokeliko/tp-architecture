@@ -31,7 +31,7 @@
         <h2>Trajet disponible</h2>
       </v-row>
       <v-row>
-        <v-col cols="12" sm="3" v-for="travel in travels" v-bind:key="travel.id">
+        <v-col cols="12" sm="3" v-for="travel in travels['travels']" v-bind:key="travel.id">
           <v-card class="grey lighten-3">
             <v-card-title>{{ travel.startAirport.name }} {{ travel.startAirport.code }} to {{ travel.endAirport.name }} {{ travel.endAirport.code }}</v-card-title>
             <v-card-subtitle>{{ travel.cost }} €</v-card-subtitle>
@@ -52,10 +52,34 @@
         </v-col>
       </v-row>
       <v-row no-gutters>
+        <h3>Trajet disponible avec l'entreprise externe</h3>
+      </v-row>
+      <v-row>
+        <v-col cols="12" sm="3" v-for="flight in travels['flights']" v-bind:key="flight.id">
+          <v-card class="grey lighten-3">
+            <v-card-title>{{ flight.code  }} : {{ flight.departure }} to {{ flight.arrival }}</v-card-title>
+            <v-card-subtitle>{{ flight.base_price }} € <span v-if="flight.airplane != undefined">with plane : {{ flight.airplane.name }} ({{ flight.airplane.total_seats }} seats)</span></v-card-subtitle>
+            <div class="text-right">
+              <v-btn
+                  class="mx-1"
+                  fab
+                  dark
+                  color="light-green darken-1"
+                  v-on:click="addFlight(flight)"
+              >
+                <v-icon dark>
+                  mdi-plus
+                </v-icon>
+              </v-btn>
+            </div>
+          </v-card>
+        </v-col>
+      </v-row>
+      <v-row no-gutters>
         <h2>Trajet sélectionné</h2>
       </v-row>
       <v-row>
-        <v-col cols="12" sm="3" v-for="travel in travelsChosen" v-bind:key="travel.id">
+        <v-col cols="12" sm="3" v-for="travel in travelsChosen['travels']" v-bind:key="travel.id">
           <v-card class="grey lighten-3">
             <v-card-title>{{ travel.startAirport.name }} {{ travel.startAirport.code }} to {{ travel.endAirport.name }} {{ travel.endAirport.code }}</v-card-title>
             <v-card-subtitle>{{ travel.cost }} €</v-card-subtitle>
@@ -66,6 +90,30 @@
                   dark
                   color="deep-orange accent-4"
                   v-on:click="removeTravel(travel)"
+              >
+                <v-icon dark>
+                  mdi-delete
+                </v-icon>
+              </v-btn>
+            </div>
+          </v-card>
+        </v-col>
+      </v-row>
+      <v-row no-gutters>
+        <h3>Trajet réservés avec l'entreprise externe</h3>
+      </v-row>
+      <v-row>
+        <v-col cols="12" sm="3" v-for="flight in travelsChosen['flights']" v-bind:key="flight.id">
+          <v-card class="grey lighten-3">
+            <v-card-title>{{ flight.code  }} : {{ flight.departure }} to {{ flight.arrival }}</v-card-title>
+            <v-card-subtitle>{{ flight.base_price }} € <span v-if="flight.airplane != undefined">with plane : {{ flight.airplane.name }} ({{ flight.airplane.total_seats }} seats)</span></v-card-subtitle>
+            <div class="text-right">
+              <v-btn
+                  class="mx-2"
+                  fab
+                  dark
+                  color="deep-orange accent-4"
+                  v-on:click="removeFlight(flight)"
               >
                 <v-icon dark>
                   mdi-delete
@@ -102,10 +150,21 @@
         </v-btn>
       </v-row>
       <v-row>
-        <v-col cols="12" sm="4" v-for="travel in travelsChosen" v-bind:key="travel.id">
+        <v-col cols="12" sm="4" v-for="travel in travelsChosen['travels']" v-bind:key="travel.id">
           <v-card class="grey lighten-3">
             <v-card-title>{{ travel.startAirport.name }} {{ travel.startAirport.code }} to {{ travel.endAirport.name }} {{ travel.endAirport.code }}</v-card-title>
             <v-card-subtitle>{{ travel.cost }} €</v-card-subtitle>
+          </v-card>
+        </v-col>
+      </v-row>
+      <v-row>
+        <h3>Réservé avec l'entreprise externe</h3>
+      </v-row>
+      <v-row>
+        <v-col cols="12" sm="4" v-for="flight in travelsChosen['flights']" v-bind:key="flight.id">
+          <v-card class="grey lighten-3">
+            <v-card-title>{{ flight.code  }} : {{ flight.departure }} to {{ flight.arrival }}</v-card-title>
+            <v-card-subtitle>{{ flight.base_price }} € <span v-if="flight.airplane != undefined">with plane : {{ flight.airplane.name }} ({{ flight.airplane.total_seats }} seats)</span></v-card-subtitle>
           </v-card>
         </v-col>
       </v-row>
@@ -135,7 +194,10 @@ export default {
     return {
       reservationCode: [],
       travels: [],
-      travelsChosen: [],
+      travelsChosen: {
+        'travels': [],
+        'flights': [],
+      },
       reservations: [],
       page: 0,
       email: ""
@@ -147,36 +209,42 @@ export default {
   },
   methods: {
     addTravel(travel) {
-      this.travelsChosen.push(travel);
+      this.travelsChosen['travels'].push(travel);
       this.removeTravelFromList(travel);
+    },
+    addFlight(flight) {
+      this.travelsChosen['flights'].push(flight);
     },
     removeTravel(travel) {
       this.removeTravelChoosenFromList(travel);
-      this.travels.push(travel);
+      this.travels['travels'].push(travel);
+    },
+    removeFlight(flight) {
+      this.travels['flights'].push(flight);
     },
     removeTravelFromList(travelToRemove) {
       let tmp = [];
-      this.travels.forEach(travel => {
+      this.travels['travels'].forEach(travel => {
         if (travel.id != travelToRemove.id) {
           tmp.push(travel);
         }
       });
-      this.travels = tmp;
+      this.travels['travels'] = tmp;
     },
     removeTravelChoosenFromList(travelToRemove) {
       let tmp = [];
-      this.travelsChosen.forEach(travel => {
+      this.travelsChosen['travels'].forEach(travel => {
         if (travel.id != travelToRemove.id) {
           tmp.push(travel);
         }
       });
-      this.travelsChosen = tmp;
+      this.travelsChosen['travels'] = tmp;
     },
     reservate() {
       if (this.travelsChosen.length == 0) {
         alert('Vous devez chosir un ou plusieurs voyages pour passer à l\'étape suivante.');
       } else {
-        this.reservationCode.push(TravelReservateHandler.handle(this.travelsChosen));
+        this.reservationCode.push(TravelReservateHandler.handle(this.travelsChosen, this.email));
         this.page = 2;
       }
     },
