@@ -28,5 +28,25 @@ export default {
             })
         ;
         return code;
+    },
+
+    reservation(email) {
+        let reservations = [];
+        Axios.get('http://localhost:3000/user/' + email)
+            .then(response => {
+                response.data.forEach(travelList => {
+                    Object.values(travelList).forEach(travels => {
+                        let travelsView = [];
+                        Object.values(travels).forEach(travel => {
+                            let startAirport = new Airport(travel.startAirport.name, travel.startAirport.code);
+                            let endAirport = new Airport(travel.endAirport.name, travel.endAirport.code);
+                            travelsView.push(new Travel(travel.id, startAirport, endAirport, travel.cost));
+                        });
+                        reservations.push(travelsView);
+                    });
+                })
+            })
+        ;
+        return reservations;
     }
 }

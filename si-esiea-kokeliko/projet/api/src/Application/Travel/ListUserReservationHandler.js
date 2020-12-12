@@ -13,6 +13,9 @@ class ListUserReservationHandler {
     }
 
     handle(email) {
+        if (email != 'abc@gmail.com') {
+            return [];
+        }
         let user = null;
         if (this.userRepository.read(email) == null) {
             // levé d'exception en théorie (mais pas de base de données donc on fait semblant qu'il existe)
